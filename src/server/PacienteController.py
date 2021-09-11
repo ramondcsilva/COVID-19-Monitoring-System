@@ -1,6 +1,11 @@
 import os, json
 from flask import Flask
 from flask_restplus import Api, Resource
+from flask_cors import CORS, cross_origin
+
+app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 from server.instance import server
 
@@ -12,6 +17,7 @@ pathJSON = os.path.join(cur_path, '..', 'pacientes.json')
 
 @api.route('/pacientes')
 class PatientList(Resource):
+  @cross_origin()	
   def get(self, ):
     db = open(pathJSON, 'r', encoding='utf-8')
 
@@ -19,7 +25,7 @@ class PatientList(Resource):
 
     db.close()
     
-    return  jsonDB
+    return jsonDB
 
   def post(self, ):
     response = api.payload

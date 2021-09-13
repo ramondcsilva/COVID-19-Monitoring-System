@@ -154,50 +154,63 @@
     <div class="card" style="width: 400px">
       <img class="card-img-top mt-4" src="/public/avatar.png" alt="Card image">
       <div class="card-body">
-        <h4 class="card-title ">Paciente</h4>
+        <h4 class="card-title">Paciente</h4>
         <p class="card-text ">Dados do Paciente</p>
       </div>
     </div>
 
-    <div class="card">
-      <div class="card-body table-scroll" style="min-width: 600px; max-width: 600px; max-height: 500px; min-height: 500px;">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nome</th>
-              <th scope="col">Estado</th>
-              <th scope="col">Ação</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-          </tbody>
-        </table>
+    <div class="flex">
+      <div class="card">
+        <div class="card-body table-scroll" style="min-width: 600px; max-width: 600px; max-height: 300px; min-height: 300px;">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+      <div class="card mt-4">
+        <div class="card-body table-scroll" style="min-width: 600px; max-width: 600px; max-height: 300px; min-height: 300px;">
+          <table class="table table-striped">
+            <tbody class="urgencia">
+              
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+    </div>  
+      
   </div>
 
   <script>
-    var table = document.querySelector("tbody");
+    var table = document.querySelectorAll("tbody")[0];
+    var tableUrgencia = document.querySelectorAll("tbody")[1];
     var json = JSON;
     var lengthTable = 0;
 
     var jsonRequesting = function(){
-      // Add your code below this line
       req=new XMLHttpRequest();
       req.open("GET",'http://127.0.0.1:5000/pacientes',true);
       req.send();
 
       req.onload=function(){
         json=JSON.parse(req.responseText);
-        console.log(lengthTable);
         if(lengthTable > 0){
           table.innerHTML = '';
+          tableUrgencia.innerHTML = '';
         } 
         
         for (var i = 0; i < Object.keys(json).length; i++){
-          createTable(json, i);  
+          createTable(json, i);   
         }  
       };
     }
@@ -211,12 +224,11 @@
       var estado = document.createElement("td");
       var selecionar = document.createElement("td");
       var btn = document.createElement("button");
-      
 
 
       var idNode = document.createTextNode(JSON.stringify(Object.keys(item)[i]).replace(/['"}]+/g, ''));
       i = i + 1;
-      var nomeNode = document.createTextNode(JSON.stringify(item[i].Nome).replace(/['"{}]+/g, ''));
+      var nomeNode = document.createTextNode(JSON.stringify(item[i].Nome).replace(/['"{}]+/g, ''));      
       var estadoNode = document.createTextNode(JSON.stringify(item[i].Estado).replace(/['"{}]+/g, ''));
       lengthTable = i;
       var nomebtn = document.createTextNode('Selecionar');
@@ -233,10 +245,17 @@
       row.appendChild(estado);
       row.appendChild(selecionar);
 
-      table.appendChild(row);
-    }
+      if(JSON.stringify(item[i].Estado).replace(/['"{}]+/g, '') === 'Urgência'){
+        tableUrgencia.appendChild(row);
+      }else {
+        table.appendChild(row);
+      }
 
-    
+      btn.onclick =  function(){
+        document.querySelector('h4').innerHTML = JSON.stringify(item[i].Nome).replace(/['"{}]+/g, '');
+        document.querySelector('p').innerHTML = JSON.stringify(item[i].Estado).replace(/['"{}]+/g, '');
+      }
+    }  
 
   </script>
 </body>

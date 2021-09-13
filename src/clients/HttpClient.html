@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>Covid-ATT</title>
   <style>
-    body {
-      text-align: center;
-      font-family: "Helvetica", sans-serif;
-    }
     h1 {
       font-size: 2em;
       font-weight: bold;
@@ -24,41 +20,224 @@
       background-color: #4791d0;
       border-radius: 5px;
       border: 1px solid #4791d0;
-      padding: 5px 10px 8px 10px;
+      padding: 1px 4px 3px 4px;
     }
     button:hover {
       background-color: #0F5897;
       border: 1px solid #0F5897;
     }
+    header {
+    background-color: #272727B3;
+    width: 100%;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 150px;
+    }
+
+    nav {
+      opacity: initial;
+      display: flex; 
+      justify-content: center;
+    }
+
+    a {
+      color: #ffffff;
+      display: flex; 
+      justify-content: flex-start;
+    }
+
+    h1 {
+      margin-top: 18px;
+    }
+    #logo {
+      width: 60px;
+    }
+
+    html,
+    body {
+      text-align: center;
+      font-family: "Helvetica", sans-serif;
+      width: 100%;
+      height: 100%;
+      background-image: url(/public/background2.jpg);
+      min-height: 100%;
+      min-width: 1000px;
+      height: auto;
+
+      position: relative;
+      top: 0;
+      left: 0;
+    }
+
+    a {
+      text-decoration: none;
+      transition: 0.3s opacity;
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
+
+    .container {
+      width: 90%;
+      display: flex;
+    }
+
+    main {
+      width: 100%;
+      display: flex;
+    }
+
+    .card {
+      justify-content: center;
+      margin-left: 50px;
+    }
+
+    
+    table {
+      border-collapse: collapse;
+    }
+
+    thead tr {
+      border-top: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    thead td {
+      font-weight: 700;
+    }
+
+    td {
+      padding: .5rem 1rem;
+      font-size: .9rem;
+      color: black;
+    }
+
+    td .status {
+      display: inline-block;
+      height: 10px;
+      width: 10px;
+      border-radius: 50%;
+      margin-right: 1rem;
+    }
+
+    tr td:last-child {
+      align-items: center;
+    }
+
+    .table-responsive {
+      width: 100%;
+    }
+    
+    .card-body {
+      padding: 1rem;
+    }
+
+    .table-scroll{
+      overflow: auto;
+    }
   </style>
 </head>
 <body>
-  
-  <h1>Cat Photo Finder</h1> 
-  <p class="message box">
-    The message will go here
-  </p>
-  <p>
-    <button id="getMessage">
-      Get Message
-    </button>
-  </p>
+  <header>
+    <nav class="container">
+      <a href="/">
+        <img src="/public/coronavirus.png" alt="COVID-ATT" id="logo">
+        <h1>Covid-ATT</h1>
+      </a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="card" style="width: 400px">
+      <img class="card-img-top mt-4" src="/public/avatar.png" alt="Card image">
+      <div class="card-body">
+        <h4 class="card-title ">Paciente</h4>
+        <p class="card-text ">Dados do Paciente</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body table-scroll" style="min-width: 600px; max-width: 600px; max-height: 500px; min-height: 500px;">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded',function(){
-      document.getElementById('getMessage').onclick=function(){
-        // Add your code below this line
-        req=new XMLHttpRequest();
-        req.open("GET",'http://127.0.0.1:5000/pacientes',true);
-        req.send();
-        req.onload=function(){
-          json=JSON.parse(req.responseText);
-          document.getElementsByClassName('message')[0].innerHTML=JSON.stringify(json);          
-        };
+    var table = document.querySelector("tbody");
+    var json = JSON;
+    var lengthTable = 0;
+
+    var jsonRequesting = function(){
+      // Add your code below this line
+      req=new XMLHttpRequest();
+      req.open("GET",'http://127.0.0.1:5000/pacientes',true);
+      req.send();
+
+      req.onload=function(){
+        json=JSON.parse(req.responseText);
+        console.log(lengthTable);
+        if(lengthTable > 0){
+          table.innerHTML = '';
+        } 
         
-        // Add your code above this line
+        for (var i = 0; i < Object.keys(json).length; i++){
+          createTable(json, i);  
+        }  
       };
-    });
+    }
+
+    setInterval(jsonRequesting,2000);
+
+    createTable = function (item, i){
+      var row = document.createElement("tr");
+      var id = document.createElement("td");
+      var nome = document.createElement("td");
+      var estado = document.createElement("td");
+      var selecionar = document.createElement("td");
+      var btn = document.createElement("button");
+      
+
+
+      var idNode = document.createTextNode(JSON.stringify(Object.keys(item)[i]).replace(/['"}]+/g, ''));
+      i = i + 1;
+      var nomeNode = document.createTextNode(JSON.stringify(item[i].Nome).replace(/['"{}]+/g, ''));
+      var estadoNode = document.createTextNode(JSON.stringify(item[i].Estado).replace(/['"{}]+/g, ''));
+      lengthTable = i;
+      var nomebtn = document.createTextNode('Selecionar');
+
+      
+      id.appendChild(idNode);
+      nome.appendChild(nomeNode);
+      estado.appendChild(estadoNode);
+      selecionar.appendChild(btn);
+      btn.appendChild(nomebtn);
+
+      row.appendChild(id);
+      row.appendChild(nome);
+      row.appendChild(estado);
+      row.appendChild(selecionar);
+
+      table.appendChild(row);
+    }
+
+    
+
   </script>
 </body>
 </html>

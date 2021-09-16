@@ -25,7 +25,7 @@ class ServerTCP(object):
             th.Thread(target = self.listenToClient,args = (client,address)).start()
 
     def listenToClient(self, client, address):
-        size = 1024
+        size = 2048
         while True:
             try:
                 data = client.recv(size)

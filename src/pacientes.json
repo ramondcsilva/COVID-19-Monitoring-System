@@ -2,11 +2,11 @@
     "1":{
         "Nome":"Ramon",
         "Idade":"20",
-        "Temperatura":"38",
-        "PressaoArterialMaxima":"85",
-        "FrequenciaRespiratoria":"27",
-        "FrequenciaCardiaca":"113",
-        "SaturacaoSanguinea":"86",
+        "Temperatura":"36",
+        "PressaoArterialMaxima":"130",
+        "FrequenciaRespiratoria":"14",
+        "FrequenciaCardiaca":"52",
+        "SaturacaoSanguinea":"90",
         "Estado":"Grave"
     },
     "2":{

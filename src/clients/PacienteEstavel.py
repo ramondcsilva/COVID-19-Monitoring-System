@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# -*- coding: utf-8 -*-
-
 import socket, random
 
 # numero randomico para simular dados do oximetro
@@ -11,21 +9,21 @@ rndRespiratorio = 10 #movimento/minuto
 rndCardiaco = 90 #b/minuto
 rndSaturacao = 96 # Porcetagem
 
-#18.188.134.59
+# Funcao que inicia a conexão do cliente com o ServerTCP
 def client(host = 'localhost', port=8080): 
-    # Create a TCP/IP socket 
+    # Cria um  TCP/IP socket 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # Connect the socket to the server 
+    # Conecta o Socket com o Server 
     server_address = (host, port) 
     print ("Conectando ao endereco %s:%s" % server_address) 
     sock.connect(server_address)
     
-    # Send data 
+    # Envia os dados
     try: 
         while True:
-            # Send data 
             message = "Saturacao sanguinea ="
             i = 0
+            # Inicia as variaveis com o valor randomico
             if i == 0:
                 valueTemp = rndTemperatura
                 valueSatu = rndSaturacao
@@ -59,10 +57,13 @@ def client(host = 'localhost', port=8080):
                 valueArte = valueArte + 1    
                 
             
-            print ("Enviando o dado: %s" %message, valueSatu, "%")
+            
+            #print ("Enviando o dado: %s" %message, valueSatu, "%")
+            # Envia mensagem para o Server
             message = "4,Nome,Kuro,Idade,26,Temperatura,"+str(valueTemp)+",PressaoArterialMaxima,"+str(valueArte)+",FrequenciaRespiratoria,"+str(valueResp)+",FrequenciaCardiaca,"+str(valueCard)+",SaturacaoSanguinea,"+str(valueSatu)+",Estado,x"
             sock.sendall(message.encode('utf-8')) 
             
+            # Recebe resposta do serverTCP
             data = sock.recv(2048) 
             
             i+=1
@@ -76,6 +77,7 @@ def client(host = 'localhost', port=8080):
         print ("Other exception: %s" %str(e)) 
         
     finally: 
+        # Fecha conexao
         sock.close() 
         print ("Fechando a conexao com o server...")
         

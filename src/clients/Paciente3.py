@@ -7,7 +7,7 @@ rndTemperatura = random.randint(36,39) #ºCelsius
 rndSaturacao = random.randint(85,97) # Porcetagem
 rndRespiratorio = random.randint(9,29) #movimento/minuto
 rndCardiaco = random.randint(51,120) #b/minuto
-rndArterial = random.randint(71,130) #mmHg
+rndArterial = random.randint(61,130) #mmHg
 
 #18.188.134.59
 def client(host = 'localhost', port=8080): 
@@ -64,7 +64,7 @@ def client(host = 'localhost', port=8080):
                 
             
             print ("Enviando o dado: %s" %message, valueSatu, "%")
-            message = "3,Nome,Zatana,Idade,30,Temperatura,"+str(valueTemp)+",PressaoArterialMaxima,"+str(valueArte)+",FrequenciaRespiratoria,"+str(valueResp)+",FrequenciaCardiaca,"+str(valueCard)+",SaturacaoSanguinea,"+str(valueSatu)+",Estado,x"
+            message = "3,Nome,Zatana,Idade,30,Temperatura,"+str(valueTemp)+",PressaoArterialMaxima,"+str(valueArte)+",FrequenciaRespiratoria,"+str(valueResp)+",FrequenciaCardiaca,"+str(valueCard)+",SaturacaoSanguinea,"+str(valueSatu)+",Estado,x,Pontuacao,00"
             sock.sendall(message.encode('utf-8')) 
             # Look for the response 
             # amount_received = 0 

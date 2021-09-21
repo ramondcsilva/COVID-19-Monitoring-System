@@ -2,41 +2,34 @@
     "1":{
         "Nome":"Ramon",
         "Idade":"20",
-        "Temperatura":"36",
-        "PressaoArterialMaxima":"130",
-        "FrequenciaRespiratoria":"14",
-        "FrequenciaCardiaca":"52",
-        "SaturacaoSanguinea":"90",
-        "Estado":"Grave"
+        "Temperatura":"39",
+        "PressaoArterialMaxima":"69",
+        "FrequenciaRespiratoria":"22",
+        "FrequenciaCardiaca":"106",
+        "SaturacaoSanguinea":"94",
+        "Estado":"Grave",
+        "Pontuacao":7
     },
     "2":{
         "Nome":"Anaya",
         "Idade":"38",
-        "Temperatura":"36",
-        "PressaoArterialMaxima":"96",
-        "FrequenciaRespiratoria":"9",
-        "FrequenciaCardiaca":"90",
-        "SaturacaoSanguinea":"89",
-        "Estado":"Grave"
+        "Temperatura":"39",
+        "PressaoArterialMaxima":"81",
+        "FrequenciaRespiratoria":"11",
+        "FrequenciaCardiaca":"91",
+        "SaturacaoSanguinea":"96",
+        "Estado":"Estavel",
+        "Pontuacao":2
     },
     "3":{
         "Nome":"Zatana",
         "Idade":"30",
-        "Temperatura":"38",
-        "PressaoArterialMaxima":"97",
-        "FrequenciaRespiratoria":"24",
-        "FrequenciaCardiaca":"85",
-        "SaturacaoSanguinea":"95",
-        "Estado":"Grave"
-    },
-    "4":{
-        "Nome":"Kuro",
-        "Idade":"26",
         "Temperatura":"36",
-        "PressaoArterialMaxima":"110",
-        "FrequenciaRespiratoria":"10",
-        "FrequenciaCardiaca":"90",
-        "SaturacaoSanguinea":"96",
-        "Estado":"Estavel"
+        "PressaoArterialMaxima":"117",
+        "FrequenciaRespiratoria":"18",
+        "FrequenciaCardiaca":"98",
+        "SaturacaoSanguinea":"98",
+        "Estado":"Estavel",
+        "Pontuacao":1
     }
 }

@@ -60,7 +60,7 @@ def client(host = 'localhost', port=8080):
             
             #print ("Enviando o dado: %s" %message, valueSatu, "%")
             # Envia mensagem para o Server
-            message = "4,Nome,Kuro,Idade,26,Temperatura,"+str(valueTemp)+",PressaoArterialMaxima,"+str(valueArte)+",FrequenciaRespiratoria,"+str(valueResp)+",FrequenciaCardiaca,"+str(valueCard)+",SaturacaoSanguinea,"+str(valueSatu)+",Estado,x"
+            message = "4,Nome,Kuro,Idade,26,Temperatura,"+str(valueTemp)+",PressaoArterialMaxima,"+str(valueArte)+",FrequenciaRespiratoria,"+str(valueResp)+",FrequenciaCardiaca,"+str(valueCard)+",SaturacaoSanguinea,"+str(valueSatu)+",Estado,x,Pontuacao,00"
             sock.sendall(message.encode('utf-8')) 
             
             # Recebe resposta do serverTCP
